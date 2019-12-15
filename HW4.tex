@@ -1,0 +1,166 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage[margin=64pt]{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{bbm}
+\newcommand{\transpose}{^{\mbox{\tiny T}}}
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\hrule \vspace{0.5em}
+\noindent {\bf CFRM 461: Probability and Statistics for Computational Finance} \hfill Homework 4 \newline \hrule
+\begin{enumerate}
+\item
+\[
+	\frac{1}{2\lambda} exp \bigg\{{-\frac{|x-\mu|}{\lambda}\bigg\}} \mathbbm{1}\{x \in \mathbb{R}, \lambda > 0\}
+\]
+\begin{enumerate}
+\item
+\[
+\int_{-\infty}^{\mu}{\frac{1}{2\lambda} exp \bigg\{{\frac{x-\mu}{\lambda}\bigg\}}} dx + \int_{\mu}^{\infty}{\frac{1}{2\lambda} exp \bigg\{{-\frac{x-\mu}{\lambda}\bigg\}}} dx
+\]
+
+%Start of evaluation
+\[
+	\implies \frac{1}{2}exp \bigg\{\frac{x-\mu}{\lambda}\bigg\} \bigg|_{-\infty}^{\mu} + \frac{1}{2}exp \bigg\{-\frac{x-\mu}{\lambda}\bigg\} \bigg|_{\mu}^{\infty}
+\]
+
+\[
+	\implies \frac{1}{2}exp \bigg\{\frac{\mu-\mu}{\lambda}\bigg\} - \frac{1}{2}exp \bigg\{-\frac{-\infty-\mu}{\lambda}\bigg\} 
+	-  \frac{1}{2}exp \bigg\{-\frac{\infty-\mu}{\lambda}\bigg\} +\frac{1}{2}exp \bigg\{\frac{\mu-\mu}{\lambda}\bigg\} 
+\]
+
+If $\mu = \mathbb{R}$ and $\lambda > 0$ we can show that the PDF equals 1. Also note the function is always $>0$ because it is an exponential function therefore, this is indeed a PDF.
+\[
+	\implies \frac{1}{2} - 0 - 0 + \frac{1}{2}  = 1
+\]
+\item
+\[
+	\implies \int_{-\infty}^{x}{\frac{1}{2\lambda} exp \bigg\{{\frac{x-\mu}{\lambda}\bigg\}}} + \int_{x}^{\infty}{\frac{1}{2\lambda} exp \bigg\{{-\frac{x-\mu}{\lambda}\bigg\}}}
+\]
+\[
+	F(x < \mu) = \frac{1}{2}exp \bigg\{\frac{x-\mu}{\lambda}\bigg\} \bigg|_{-\infty}^{x}
+\]
+\[
+	\frac{1}{2}exp \bigg\{\frac{x-\mu}{\lambda}\bigg\}
+\]
+\[
+	 F(x\geq\mu) = \frac{1}{2}exp \bigg\{-\frac{x-\mu}{\lambda}\bigg\} \bigg|_{x}^{\infty}
+\]
+\[
+	\implies -\frac{1}{2}exp \bigg\{-\frac{\infty-\mu}{\lambda}\bigg\} + \frac{1}{2}exp \bigg\{-\frac{x-\mu}{\lambda}\bigg\}
+\]
+\[
+	= \frac{1}{2}exp \bigg\{-\frac{x-\mu}{\lambda}\bigg\}
+\]
+
+Note that the CDF must be equal to one therefore when F(x $\geq \mu$) the CDF will be \\
+1 - $\frac{1}{2}exp \big\{-\frac{x-\mu}{\lambda}\big\}$
+Additionally, the function will always be positive because it is exponential.
+
+\[
+	F(x)	= \left \{ \begin{array}{ll}
+      \frac{1}{2}exp\big\{{\frac{x-\mu}{\lambda}}\big\} & x< \mu \\
+      1- \frac{1}{2}exp\big\{{-\frac{x-\mu}{\lambda}}\big\} & x\geq \mu \\
+	\end{array} \right \}
+\]
+\end{enumerate}
+\newpage
+
+\item 
+\[
+	f(x,y)	= \left \{ \begin{array}{ll}
+      4xy, & 0\leq x \leq 1, 0 \leq y \leq 1 \\
+      0, & otherwise \\
+	\end{array} \right \}
+\]
+\begin{enumerate}
+\item Find the joint CDF
+\[
+	\int_{0}^{x}\int_{0}^{y} 4uv \; du \;dv
+\]
+\[
+	\int_{0}^{x} 2y^2v \; dv
+\]
+\[
+	 x^2 y^2
+\]
+\item Compute $\mathbb{E}[XY]$
+\[
+	\int_{0}^{1}\int_{0}^{1} 4x^2y^2\; dx\; dy
+\]
+\[
+	\int_{0}^{1} \frac{4}{3} y^2 dy = 	\frac{4}{9}
+\]
+\item Find the marginal CDF of X and Y
+\[
+	F_x(x,1) = x^2 \implies \int_{0}^{x}\int_{0}^{1}4xy = x^2
+\]
+\[
+	F_y(1,y) = y^2  \implies \int_{0}^{y}\int_{0}^{1}4xy = y^2 
+\]
+\item Are X and Y independent? Yes
+\[
+	F(x,y) = F_x(x)F_y(y) = x^2y^2
+\]
+\[
+	\int_{0}^{1} 4xy \; dy = 2x
+\]
+\[
+	\int_{0}^{1} 4xy \; dx = 2y
+\]
+\[
+	f(x,y) = f_x(x)f_y(y) = 4xy
+\]
+\end{enumerate}
+
+\item Prove $\mathbb{E}[X] = \int_{0}^{\infty} 1 - F(x)dx$ to show that $E[X] = \frac{1}{\lambda}$
+\[
+	E[X] = \int_{0}^{\infty} x f(x) dx \implies
+	\lim_{n\to\infty} \int_{0}^{n} x f(x) dx
+\]
+\[
+	\implies \lim_{n\to\infty} [nF(n) - \int_{0}^{n} F(x) dx]
+\]
+\[
+	nF(n) - n + n - \int_{0}^{n} F(x) dx
+\]
+\[
+	\implies \lim_{n\to\infty} [-n(1-F(n) + \int_{0}^{n} 1- F(x) dx] = \int_{0}^{n} 1- F(x) dx
+\]
+\[
+	\implies \lim_{n\to\infty} \int_{0}^{n} 1- (1-e^{-\lambda x})dx
+\]
+\[
+	\implies \int_{0}^{\infty} e^{-\lambda x} dx = -\frac{e^{-\lambda x}}{\lambda} \bigg |_{0}^{\infty} = \frac{1}{\lambda}
+\]
+\item Find c where c(2x-$x^2$), if {$0 \leq x \leq 2$} compute $\mathbb{E}[X]$ and $\mathbb{V}[X]$
+\[
+	c\int_{0}^{2}2x-x^2 dx = 1
+\]
+\[
+	c\bigg(x^2 - \frac{x^3}{3} \bigg|_{0}^{2} \; \bigg)
+\]
+\[
+	c\bigg(4 - \frac{8}{3}\bigg) = 1
+\]
+\[
+	c = \frac{3}{4}
+\]
+\[
+	\mathbb{E}[X] =  \int_{0}^{2} \frac{3}{2}x^2-\frac{3}{4}x^3 dx = 1
+\]
+\[
+	\mathbb{V}[X] = \int_{0}^{2} x^2\bigg(\frac{3}{2}x^2-\frac{3}{4}x^3\bigg) - 1 = \frac{3}{5}
+\]
+\end{enumerate}
+\end{document}
+

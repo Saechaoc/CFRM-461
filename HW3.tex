@@ -1,0 +1,109 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage[margin=64pt]{geometry}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{listings}
+\newcommand{\transpose}{^{\mbox{\tiny T}}}
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\hrule \vspace{0.5em}
+\noindent {\bf CFRM 461: Probability and Statistics for Computational Finance} \hfill Homework 3 \newline \hrule
+
+\enumerate 
+\item
+\begin{enumerate}
+\item They are not mutually exclusive because one person can speak multiple languages.
+\item They are not independent.
+\[
+	P(A\cap B) = P(A) \times P(B)
+\]
+\[
+	\implies 0.04 = 0.24 \times 0.07
+\]
+\[
+	\implies 0.04 \;!= 0.02
+\]
+\item 24 + 7 - 4 = 27\%
+\item 24 - 4 = 20\%
+\item 100 - 27 = 73\%
+\end{enumerate}
+\item 1 - P(1st is black $\cap$ 2nd is black $\cap$ 3rd is black)
+\[
+1 - \frac{26}{52}* \frac{25}{51}*\frac{24}{50} = 0.88
+\]
+\item	M = Miss; R = Rain
+\[
+	P(M \mid R) = 0.05
+\]
+\[
+	P(M \mid !R) = 0.01
+\]
+\[
+	P(R) = 0.28
+\]
+\[
+	P(R \mid M) = \frac{P(M \mid R) * P(R)}{P(M)}
+\]
+\[
+	P(M \cap R) = 0.05 * 0.28 = 0.014
+\]
+\[
+	P(M \cap !R) = 0.01 * (1-0.28) = 0.0072
+\]
+\[
+	P(M) = 0.014 + 0.0072 = 0.0212
+\]
+\[
+	P(R \mid M) = \frac{0.05 * 0.28}{0.0212}
+\]
+\[
+	\implies 0.66
+\]
+\item
+\begin{enumerate}
+\item $\mathbb{P}(\frac{11}{36} = 1, \frac{9}{36} = 2, \frac{7}{36} = 3, \frac{5}{36} = 4, \frac{3}{36} = 5, \frac{1}{36} = 6)$
+
+\item
+\[
+	F_{x}(x) = 
+\left \{
+  \begin{tabular}{cc}
+  0, & x \textless \;1 \\
+  0.31, & 1 $\leq$  x $\textless$ 2\\
+  0.56, & 2  $\leq$ x $\textless$ 3 \\
+  0.75, & 3 $\leq$ x $\textless$ 4 \\ 
+  0.89, & 4 $\leq$ x $\textless$ 5 \\
+  0.97, & 5 $\leq$ x $\textless$ 6 \\
+  1, & x $\geq$ 6 
+  \end{tabular}
+\right \}
+\]
+
+\item 
+\[ 
+\frac{11}{36} * 1 + \frac{9}{36} * 2 +  \frac{7}{36} * 3 + \frac{5}{36} * 4 + \frac{3}{36} * 5 + \frac{1}{36} * 6 = \frac{91}{36} = 2.53
+\]
+\item 
+\[ 
+(1-2.53)^2*\frac{11}{36} + (2-2.53)^2*\frac{9}{36} + (3-2.53)^2 *\frac{7}{36} +
+\]
+\[(4-2.53)^2*\frac{5}{36} + (5-2.53)^2*\frac{3}{36} + (6-2.53)^2 * \frac{1}{36} = 2.03
+\]
+\end{enumerate}
+\item
+\begin{enumerate}
+\item $(1-0.03)^6 * .03 = 0.02$
+\item \[
+	\lambda = 2.26 \implies P(X\leq1) = 2.26^0e^{-2.26}+ 2.26e^{-2.26} = 0.34
+\]
+\item $\sqrt{30*.976(1-.976)} = 0.84 $
+\end{enumerate}
+\end{document}
